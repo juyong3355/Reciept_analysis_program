@@ -8,7 +8,7 @@ version = "1.0.0"
 description = "Local Windows desktop app for extracting, reviewing, validating, and exporting Korean receipt data"
 readme = "README.md"
 requires-python = ">=3.11"
-license = { text = "Proprietary" }
+license = { text = "MIT" }
 authors = [{ name = "Receipt MVP Team" }]
 dependencies = [
   "pydantic>=2.8,<3",
@@ -47,4 +47,3 @@ markers = [
 
 [tool.coverage.run]
 source = ["receipt_mvp"]
-
