@@ -1,0 +1,50 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "receipt-mvp"
+version = "1.0.0"
+description = "Local Windows desktop app for extracting, reviewing, validating, and exporting Korean receipt data"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Proprietary" }
+authors = [{ name = "Receipt MVP Team" }]
+dependencies = [
+  "pydantic>=2.8,<3",
+  "PyMuPDF>=1.24,<2",
+  "Pillow>=10,<13",
+  "PySide6>=6.7,<7",
+  "openpyxl>=3.1,<4",
+]
+
+[project.optional-dependencies]
+ocr = [
+  "paddleocr>=3.0,<4",
+  "paddlepaddle>=3.0,<4",
+  "opencv-python-headless>=4.10,<5",
+]
+test = [
+  "pytest>=8.2,<10",
+  "pytest-qt>=4.4,<5",
+]
+
+[project.scripts]
+receipt-mvp = "receipt_mvp.main:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/receipt_mvp"]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]
+pythonpath = ["src"]
+markers = [
+  "integration: tests that use external real receipt samples",
+  "ui: tests that require the Qt application",
+  "ocr: tests that require an OCR engine and model",
+]
+
+[tool.coverage.run]
+source = ["receipt_mvp"]
+
